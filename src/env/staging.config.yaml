@@ -1,0 +1,90 @@
+app:
+  port: 3000
+  name: "DarkDungeonBE"
+  description: "darkdungeonBE"
+  version: "1.0.0"
+  pathSwagger: "api/darkdungeonBE"
+
+db:
+  mongo:
+    host: "127.0.0.1:27017"
+    dbname: "DarkDungeon"
+
+logger:
+  config:
+    projectName: "DarkDungeon"
+    log:
+      time: 60
+      size: null
+      path: "./logs/DarkDungeon_local/log"
+      level: "info"
+      format: "json"
+      console: false
+      file: true
+      stream: true
+    detail:
+      time: 60
+      size: null
+      path: "./logs/DarkDungeon_local/detail"
+      level: "debug"
+      format: "json"
+      console: false
+      file: true
+      stream: true
+      rawData: true
+    summary:
+      time: 60
+      size: null
+      path: "./logs/DarkDungeon_local/summary"
+      level: "debug"
+      console: false
+      file: true
+      format: "json"
+    stat:
+      time: 60
+      size: null
+      path: "./logs/DarkDungeon_local/stat"
+      mode: 0
+      statInterval: 1
+      console: false
+      file: true
+      stream: true
+      kafka: false
+      prometheus: true
+      prometheusMode: "multi"
+      flush: true
+      format: "json"
+      process: [] 
+  statPattern:
+    suc: "<nodeName> <type> <destNode> <command> <action>"
+    err: "<nodeName> <type> <destNode> <command> error <action>"
+    requestUnknown: "<nodeName> received bad <command> request"
+    returnUnknown: "<nodeName> returned <command> error"
+    requestMissingOrInvalid: "<nodeName> received bad <command> request"
+    receivedRequest: "<nodeName> received <command> request"
+    returnedSuccess: "<nodeName> returned <command> success"
+    receivedUnknownUrl: "<nodeName> received <command> error"
+    returnedError: "<nodeName> returned <command> error"
+    returnedunknown: "<nodeName> returned <command> error"
+    errConnection: "<nodeName> <type> <destNode> <command> connection error"
+    timeoutConnection: "<nodeName> <type> <destNode> <command> timeout"
+    type:
+      recv: "recv"
+      send: "sent"
+      request: "request"
+      received: "received"
+      returned: "returned"
+    action:
+      req: "request"
+      res: "response"
+      response: "response"
+      timeout: "timeout"
+      connectionError: "connection error"
+      responseError: "error response"
+    delimiter: "__"
+
+corsSetting:
+  origin: '*'
+  method: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'PATCH']
+  credentail: false
+  allowedHeaders: ['Origin', 'Content-Type', 'Accept']
