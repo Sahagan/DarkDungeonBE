@@ -6,7 +6,7 @@ import { detailHelper, logAppHelper, logStatHelper, summaryHelper } from 'src/co
 import { utilityHelper } from 'src/common/helpers/utility.helper';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 import { PlayerService } from './player.service';
-import { BodyPlayerDto } from './dto/create-player.dto';
+import { BodyPlayerDto, paramStageDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { ResponseModel } from 'src/interface/response.model';
 
@@ -48,7 +48,7 @@ export class PlayerController {
         type: 'body',
         metatype: BodyPlayerDto
       };
-      await logApp.log("body : "+JSON.stringify(body), "info");
+      await logApp.log("verify body : "+JSON.stringify(body), "info");
       await this.validate.transform(body,keyBody); //validate body
       await this.logStat.logStatApp(this.statApp.receivedRequest,this.commandName, 'unknown', this.statApp.type.received, req.method, 'success', this.statApp.action.req,'');
       
@@ -63,6 +63,59 @@ export class PlayerController {
       };
       result = await this.playerService.createByCondtion('player',condition,'cm_initializePlayer',logApp,logDetail,Summary);
       
+      const message = new ResponseModel(new SuccessException());
+      await logDetail.logOutputResponseDetail(this.commandName,res,message); 
+      await logApp.log('darkdungeonBE --> client :' + JSON.stringify(message), "info");
+      await this.logStat.logStatApp(this.statApp.returnedSuccess,this.commandName, 'unknown', this.statApp.type.returned, req.method, 'success', this.statApp.action.res, '20000');
+      await Summary.logEndSummary(message);
+      res.status(200);
+      res.json(message);
+    }catch(err){ 
+      await logApp.log('an error occurred : '+err, "error"); 
+      if(err.response){
+        await Summary.logEndSummary(err.response);
+        await logDetail.logOutputResponseDetail(this.commandName,res,err.response);
+        await this.logStat.logStatApp(this.statApp.returnedError,this.commandName, 'unknown', this.statApp.type.returned, req.method, 'error', this.statApp.action.res, err.response.resultCode);
+        throw err;
+      }else{
+        err = new ResponseModel(new ExpectaionFailedException());
+        await Summary.logEndSummary(err);
+        await logDetail.logOutputResponseDetail(this.commandName,res,err);
+        await this.logStat.logStatApp(this.statApp.returnedError,this.commandName, 'unknown', this.statApp.type.returned, req.method, 'error', this.statApp.action.res, err.resultCode);
+        throw err;
+      }
+    }
+  }
+
+  @Delete('/username/:username')
+  async DeletePlayer(@Req() req,@Res() res){
+    
+  }
+
+  @Get('/event/:stage')
+  async GetEvent(@Req() req,@Res() res,@Param()param:paramStageDto){
+    this.commandName = 'generateEvent';
+    let identity;
+    const Invoke = this.utility.setValueInitInvoke(req);
+    const Summary = new summaryHelper();
+    const logApp = new logAppHelper();
+    const logDetail = new detailHelper();
+    try{
+      identity =  this.utility.CheckIdentity(req,param.stage);
+      await Summary.logSummaryInit(req,this.commandName,identity);//init Summary
+      await logDetail.logInputRequestDetail(this.appName,this.commandName,req,Invoke,identity);//init Detail
+      //validation
+      const keyParam:ArgumentMetadata = {
+        type: 'custom',
+        metatype: paramStageDto
+      };
+      await logApp.log("verify param : "+JSON.stringify(param), "info");
+      await this.validate.transform(param,keyParam); //validate body
+      await this.logStat.logStatApp(this.statApp.receivedRequest,this.commandName, 'unknown', this.statApp.type.received, req.method, 'success', this.statApp.action.req,'');
+      
+      //generate event
+      
+    
       const message = new ResponseModel(new SuccessException());
       await logDetail.logOutputResponseDetail(this.commandName,res,message); 
       await logApp.log('darkdungeonBE --> client :' + JSON.stringify(message), "info");

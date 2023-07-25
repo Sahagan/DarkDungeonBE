@@ -10,6 +10,110 @@ db:
     host: "127.0.0.1:27017"
     dbname: "DarkDungeon"
 
+gameplay:
+  events:
+    stage :
+    - spawnRandomItem 
+    - hiddenPath
+    - ambush
+    - Door
+    - Statue Of Curse
+    - Statue Of Healing
+    - Puzzle
+    - Treasure Chest
+    - Monster Encounter
+    - NPC Interaction 
+    - Quest
+    - Trap
+    - Shop
+    - Teleportation
+    - Time Warp
+    - Maze 
+    - Boss Battle
+    - Artifact Discovery
+    - Invisible Bridge
+    - Spike Trap
+    - Fountain Of Healing
+    - Hallucination
+    - Secret Passage
+    - Fire Pit
+    - Enchanted Forest
+    - Spirit Guardian
+    - Cursed Treasure
+    - Ancient Ruins
+    - Guarded Gate
+    - Celestial Shrine
+    - Shadowy Figure
+    - Lost Key
+    - Magical Portal
+    - Riddle
+    - Illusionary Wall
+    - Giant Spider
+    - Healing Spring
+    - Ancient Scroll
+    - Mysterious Aura
+    - Time Loop
+    - Shifting Sands
+    - Ethereal Bridge
+    - Goblin Raid
+    - Haunted Tomb
+    - Whirlpool
+    - Guardian Statue
+    - Floating Island
+    - Mirror Maze
+    - Mystical Beacon
+    - Dragon's Lair
+    - Demonic Possession
+    - Guardian Spirit
+    - Labyrinth
+    - Underwater Cave
+    - Crystal Golem
+    - Giant Mushroom
+    - Lost Civilization
+    - Haunted Forest
+    - Witch's Hut 
+    - Fairy Ring 
+    - Volcanic Eruption 
+    - Ancient Crypt 
+    - Spiritual Cleansing
+    - Dark Ritual 
+    - Siren's Song
+    - Frozen Tundra
+    - Sacred Relic
+    - Mystic Gate
+    - Hidden Treasure
+    - Divine Intervention
+    - Enchanted Weapon
+    - Sorcerer's Apprentice
+    - Guardian Beast
+    - Eternal Flame
+    - Cursed Amulet
+    - Portal To Another Realm
+    - Eerie Whisper
+    - Magical Trinket
+    - Ancient Oak
+    - Spectral Vision
+    - Mystic Runes
+    - Enchanted Armor
+    - Phantom Wraith
+    - Ethereal Veil
+    - Cavern Of Shadows
+    - Emerald Forest
+    - Guardian Dragon
+    - Lost Compass
+    - Celestial Alignment
+    - Time Travel
+    - Spiritual Enlightenment
+    - Secret Chamber
+    - Mystical Cavern
+    - Legendary Artifact
+    - Guardian of Light
+    - Nightfall Ritual
+    - Eternal Guardian
+    - Cursed Curse
+    - Fountain of Youth
+
+
 logger:
   config:
     projectName: "DarkDungeon"

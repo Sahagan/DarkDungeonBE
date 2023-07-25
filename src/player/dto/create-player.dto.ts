@@ -11,3 +11,10 @@ export class BodyPlayerDto {
     @IsString()
     playerName: string
 }
+
+export class paramStageDto {
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsString()
+    stage: string
+}
