@@ -69,6 +69,28 @@ export class utilityHelper {
             return identity;
         };
     }
-    
+
+    generateSeed(length) {
+        let validFirstNumbers = [1, 3, 4, 5];
+        let firstNumber = 2;
+        let secondNumber = Math.floor(Math.random() * 3) + 1;
+        let generatedNumber = firstNumber.toString() + secondNumber.toString();
+      
+        for (let i = 0; i < length; i++) {
+          firstNumber = validFirstNumbers[Math.floor(Math.random() * validFirstNumbers.length)];
+          secondNumber = Math.floor(Math.random() * 3) + 1;
+          generatedNumber += firstNumber.toString() + secondNumber.toString();
+        }
+        return generatedNumber;
+    }
+
+    generateDungeon(){
+        //_1 randomNormalEvent _2 mainEvent _3 Door _4 Locked Door _5 specialEvent
+        let start = '23'; //Dungeon Entrance
+        let end = '21'
+        for(let i = 0 ; i < 10 ; i++ ){
+
+        };
+    }
 }
 
