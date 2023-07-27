@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { detailHelper, logAppHelper, logStatHelper, summaryHelper } from 'src/common/helpers/logger.helper';
 import { utilityHelper } from 'src/common/helpers/utility.helper';
@@ -15,7 +15,6 @@ export class MapController {
         private readonly config: ConfigService,
         private readonly logStat: logStatHelper,
         private readonly mapService: MapService,
-        private readonly validate: ValidationPipe,
         private readonly utility: utilityHelper
     ) { }
     @Get('/map')
