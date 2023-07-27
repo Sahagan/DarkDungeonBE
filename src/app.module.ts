@@ -16,6 +16,8 @@ import { HttpExceptionFilter } from './common/filters/exception.filter';
 /*------------------ App module ------------------*/
 import { PlayerModule } from './player/player.module';
 import { ValidationPipe } from './common/pipes/validation.pipe';
+import { MapController } from './map/map.controller';
+import { MapService } from './map/map.service';
 
 @Global()
 @Module({
@@ -60,9 +62,11 @@ import { ValidationPipe } from './common/pipes/validation.pipe';
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
-    ValidationPipe
+    ValidationPipe,
+    MapService
   ],
-  exports: [axiosHelper, logStatHelper,utilityHelper,ValidationPipe]
+  exports: [axiosHelper, logStatHelper,utilityHelper,ValidationPipe],
+  controllers: [MapController]
 })
 
 export class AppModule implements NestModule {
