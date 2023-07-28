@@ -70,13 +70,13 @@ export class utilityHelper {
         };
     }
 
-    generateSeed(length) {
+    async generateSeed(length) {
         let validFirstNumbers = [1, 3, 4, 5];
         let firstNumber = 2;
         let secondNumber = Math.floor(Math.random() * 3) + 1;
         let generatedNumber = firstNumber.toString() + secondNumber.toString();
 
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < length - 1; i++) {
             firstNumber = validFirstNumbers[Math.floor(Math.random() * validFirstNumbers.length)];
             secondNumber = Math.floor(Math.random() * 3) + 1;
             generatedNumber += firstNumber.toString() + secondNumber.toString();
@@ -84,12 +84,43 @@ export class utilityHelper {
         return generatedNumber;
     }
 
-    generateDungeon() {
+    async loopCreateMutiPath(seed,length) {
+        let loopMappingNumber = length / 2;
+        let number = 1;
+        let loopGenerateSeed = 0;
+        let mutipath = "";
+        let generatedmutipath;
+        for (let j = 0; j < loopMappingNumber; j++) { //Loop to get sumary of Even Number
+            loopGenerateSeed = loopGenerateSeed + parseInt(seed.charAt(number));
+            number = number + 2
+        };
+        number = 1; // clear number
+        for (let k = 0; k < loopGenerateSeed; k++) {
+            generatedmutipath = await this.generateSeed(parseInt(seed.charAt(number)));
+            number = number + 2;
+            mutipath = mutipath + generatedmutipath;
+        };
+        return mutipath;
+    }
+
+    async generateDungeon() {
         //_1 randomNormalEvent _2 mainEvent _3 Door _4 Locked Door _5 specialEvent
         let start = '23'; //Dungeon Entrance
-        let end = '21'
-        for (let i = 0; i < 10; i++) {
-            start = start + this.generateSeed(i);
+        let end = '21';
+        let random;
+        let generate;
+        let isFirstLoop = true;
+        for (let i = 0; i < 5; i++) {
+            random = Math.floor(Math.random() * 3) + 1
+            if (isFirstLoop === true) {
+                generate = await this.generateSeed(3);
+                start = start + generate;
+                isFirstLoop = false;
+            } else {
+                let mutipath = await this.loopCreateMutiPath(generate,generate.length);
+                generate = generate + mutipath;
+                start = start+generate;
+            }
         };
         return start + end;
     }
